@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AssemblyLab is an independent assembly learning and reverse-engineering workbench.">
+  <title>AssemblyLab — Learn Assembly, Understand Behavior</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="AssemblyLab home"><span class="brand-mark">A<span>/</span></span><span>AssemblyLab</span></a>
+    <nav class="topnav" aria-label="Main navigation">
+      <button class="nav-link active" data-view="game">Game hub</button>
+      <button class="nav-link" data-view="learn">Learn assembly</button>
+      <button class="nav-link" data-view="patterns">Malware patterns</button>
+      <button class="nav-link" data-view="analyzer">Assembly explanation</button>
+    </nav>
+    <a class="top-link" href="https://github.com/" target="_blank" rel="noreferrer">Portfolio project ↗</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> INTERACTIVE ASSEMBLY WORKBENCH</div>
+        <h1>Understand the code<br><span>beneath the code.</span></h1>
+        <p>Learn assembly from zero, explore compiler output, and recognize instruction patterns encountered during reverse engineering.</p>
+        <div class="hero-actions">
+          <button class="btn primary" data-go="game">Enter the game <span>→</span></button>
+          <button class="btn secondary" data-go="learn">Explore lessons</button>
+        </div>
+        <p class="microcopy">Independent learning project · No IYSecurity branding</p>
+      </div>
+      <div class="hero-visual" aria-label="Illustrative code and assembly preview">
+        <div class="window-bar"><i></i><i></i><i></i><span>example.cpp → x86-64</span></div>
+        <div class="code-preview">
+          <div><span class="ln">01</span><span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) {</div>
+          <div><span class="ln">02</span>  <span class="kw">return</span> a + b;</div>
+          <div><span class="ln">03</span>}</div>
+          <div class="preview-divider"></div>
+          <div><span class="ln">01</span><span class="asm-op">add</span> edi, esi <span class="comment">; add arguments</span></div>
+          <div><span class="ln">02</span><span class="asm-op">mov</span> eax, edi <span class="comment">; return value</span></div>
+          <div><span class="ln">03</span><span class="asm-op">ret</span> <span class="comment">; return to caller</span></div>
+        </div>
+        <div class="visual-footer"><span class="status-dot"></span> Concept preview · Actual output comes from Godbolt</div>
+      </div>
+    </section>
+
+    <section class="feature-strip">
+      <div><span class="feature-icon">↔</span><span><strong>Source → assembly</strong><small>Compile through Compiler Explorer</small></span></div>
+      <div><span class="feature-icon">⌘</span><span><strong>Learn step by step</strong><small>Registers, memory, stack and flow</small></span></div>
+      <div><span class="feature-icon">⌕</span><span><strong>Reverse-engineering patterns</strong><small>Annotated analyst-focused examples</small></span></div>
+    </section>
+<section id="view-game" class="view active">
+      <div class="section-heading"><div><div class="eyebrow">01 / YOUR JOURNEY</div><h2>The Reverse Engineer’s Journey</h2><p>Learn a skill, solve a challenge, earn XP and unlock the next frontier. New variations are generated locally as you play.</p></div><div class="game-status-pill"><span class="status-dot"></span> Progress saved in this browser</div></div>
+      <div class="player-card">
+        <div class="player-identity"><div class="player-avatar">A<span>/</span></div><div><div class="eyebrow">PLAYER PROFILE</div><h3 id="player-title">Assembly Explorer</h3><p id="player-rank">Level 1 · Register Rookie</p></div></div>
+        <div class="xp-block"><div class="xp-line"><strong id="player-xp">0 XP</strong><span id="xp-to-next">100 XP to next level</span></div><div class="xp-track"><div id="xp-fill" class="xp-fill"></div></div></div>
+      </div>
+      <div class="player-tools panel">
+        <div class="player-name-field">
+          <label for="player-name-input">Your display name</label>
+          <input id="player-name-input" type="text" maxlength="40" placeholder="Enter your name" autocomplete="nickname">
+          <small>This name is saved only in this browser.</small>
+        </div>
+        <button id="save-player-name" class="btn secondary" type="button">Save name</button>
+      </div>
+      <section class="certificate-panel panel" aria-labelledby="certificate-title">
+        <div>
+          <div class="eyebrow">GRADUATION GOAL</div>
+          <h3 id="certificate-title">Earn your AssemblyLab certificate</h3>
+          <p id="certificate-status">Complete every lesson and earn more than 500 XP to unlock your certificate.</p>
+        </div>
+        <div class="certificate-progress">
+          <span id="certificate-lesson-progress">0 / 30 lessons</span>
+          <span id="certificate-xp-progress">0 / 501 XP minimum</span>
+        </div>
+        <button id="download-certificate" class="btn primary" type="button" disabled>Unlock certificate</button>
+        <small class="certificate-note">A personal learning-completion certificate generated in your browser; it is not an accredited or independently verified qualification.</small>
+      </section>
+      <div class="game-stats">
+        <div class="game-stat"><span>Challenges solved</span><strong id="stat-solved">0</strong><small>Unique challenge seeds</small></div>
+        <div class="game-stat"><span>Current streak</span><strong id="stat-streak">0 days</strong><small>Practice at your pace</small></div>
+        <div class="game-stat"><span>Badges earned</span><strong id="stat-badges">0</strong><small>Skill milestones</small></div>
+        <div class="game-stat"><span>Lessons completed</span><strong id="stat-lessons">0</strong><small>From the learning path</small></div>
+      </div>
+      <div class="game-layout">
+        <div class="challenge-panel">
+          <div class="challenge-topline"><div><div class="eyebrow">CHALLENGE ARENA</div><h3 id="challenge-title">Warm up: Follow the register</h3></div><span id="challenge-difficulty" class="difficulty-pill">STARTER</span></div>
+          <p id="challenge-prompt" class="challenge-prompt">What value will be in EAX after these instructions?</p>
+          <pre id="challenge-code" class="challenge-code">mov eax, 4
+add eax, 3</pre>
+          <aside class="number-system-tip" aria-label="Decimal and hexadecimal quick reference">
+            <strong>Decimal ↔ Hex quick reference</strong>
+            <div class="number-system-grid">
+              <span>Decimal <b>8</b></span><span>Hex <b>0x8</b></span>
+              <span>Decimal <b>10</b></span><span>Hex <b>0xA</b></span>
+              <span>Decimal <b>12</b></span><span>Hex <b>0xC</b></span>
+              <span>Decimal <b>16</b></span><span>Hex <b>0x10</b></span>
+              <span>Decimal <b>20</b></span><span>Hex <b>0x14</b></span>
+              <span>Decimal <b>32</b></span><span>Hex <b>0x20</b></span>
+            </div>
+            <p>Tip: don’t mix number systems in one addition. Convert values first, or do the entire calculation in decimal.</p>
+          </aside>
+          <div id="challenge-options" class="challenge-options"></div>
+          <div id="challenge-feedback" class="challenge-feedback" aria-live="polite">Choose an answer. Hints are available if you need them.</div>
+          <div class="challenge-actions"><button id="challenge-hint" class="btn secondary">Show hint</button><button id="challenge-next" class="btn primary" disabled>Next challenge →</button><a id="challenge-godbolt" class="btn secondary" href="https://godbolt.org/" target="_blank" rel="noreferrer">Open Godbolt ↗</a></div>
+          <p class="game-disclaimer">Challenges are educational simulations. They do not execute native assembly. Godbolt opens separately for optional compiler experiments.</p>
+        </div>
+        <aside class="daily-panel"><div class="eyebrow">DAILY MISSION</div><h3 id="daily-title">Daily Register Run</h3><p id="daily-description">Solve today’s selected challenge to earn a daily bonus.</p><div class="daily-reward"><span>DAILY REWARD</span><strong>+25 XP</strong></div><div id="daily-status" class="daily-status">Not completed today</div><button id="daily-start" class="btn secondary">Play daily mission</button><div class="daily-separator"></div><div class="eyebrow">RECENT ACHIEVEMENTS</div><div id="badge-list" class="badge-list"><div class="badge-empty">Your earned badges will appear here.</div></div></aside>
+      </div>
+      <div class="worlds-heading"><div><div class="eyebrow">EXPLORE THE MAP</div><h2>Learning worlds</h2><p>Start anywhere. Recommended worlds highlight the skills behind your next challenge.</p></div><button class="btn secondary" data-go="learn">Open lesson library →</button></div>
+      <div id="world-grid" class="world-grid"></div>
+      <div class="game-callout"><strong>Designed to keep growing.</strong> Challenge variations are generated from tested templates. New lessons, instruction families and case studies can be added through regular GitHub Pages updates. No account, PAT or backend is required.</div>
+    </section>
+
+    <section id="view-learn" class="view">
+      <div class="section-heading"><div><div class="eyebrow">02 / LEARN</div><h2>Assembly, from the ground up</h2><p>Short lessons with plain-language explanations and tiny examples.</p></div></div>
+      <div class="module-banner"><div><strong id="lesson-count">30 guided lessons</strong><p>Each lesson includes examples, practical notes and a knowledge check.</p></div><div class="lesson-progress"><span id="progress-label">0 of 30 completed</span><div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div></div></div><div id="lesson-grid" class="lesson-grid"></div>
+      <div id="lesson-detail" class="lesson-detail"><div class="lesson-empty">Select a lesson to see the explanation, example and knowledge check.</div></div>
+    </section>
+
+    <section id="view-patterns" class="view">
+      <div class="section-heading"><div><div class="eyebrow">03 / REVERSE ENGINEERING</div><h2>Malware behavior pattern library</h2><p>Learn what patterns can suggest, why context matters, and what evidence to collect next.</p></div></div>
+      <div class="pattern-toolbar"><input id="pattern-search" type="search" placeholder="Search patterns, APIs or concepts…" aria-label="Search malware patterns"><select id="pattern-category" aria-label="Filter patterns"><option value="all">All categories</option><option value="Execution">Execution</option><option value="Persistence">Persistence</option><option value="Defense evasion">Defense evasion</option><option value="Discovery">Discovery</option><option value="Network">Network</option><option value="Obfuscation">Obfuscation</option></select></div>
+      <div id="pattern-grid" class="pattern-grid"></div>
+      <div id="pattern-detail" class="pattern-detail" hidden aria-live="polite"></div>
+      <div class="safety-note"><strong>Analyst note:</strong> These are behavior-oriented learning references, not verdicts. An API name or instruction sequence alone does not prove malicious intent. Validate with control flow, arguments, call targets, surrounding code and runtime evidence.</div>
+    </section>
+
+    <section id="view-analyzer" class="view">
+      <div class="section-heading"><div><div class="eyebrow">04 / ASSEMBLY ANALYZER</div><h2>Explain a disassembly snippet</h2><p>Paste assembly from Ghidra, IDA, WinDbg or another disassembler. Get instruction explanations, behavior clues and pointers for further investigation.</p></div></div>
+      <div class="analyzer-layout">
+        <div class="editor-panel">
+          <div class="panel-head"><div><span class="panel-dot blue"></span> PASTE ASSEMBLY</div><button id="load-asm-example" class="text-button">Load example ↺</button></div>
+          <textarea id="assembly-input" spellcheck="false" aria-label="Assembly input" placeholder="mov rax, [rcx]&#10;test rax, rax&#10;jz short loc_401020"></textarea>
+          <div class="analyzer-actions"><button id="analyze-assembly" class="btn primary">Explain instructions →</button><button id="clear-assembly" class="btn secondary">Clear</button></div>
+        </div>
+        <div id="analysis-results" class="analysis-results"><div class="lesson-empty">Your instruction explanations will appear here.</div></div>
+      </div>
+      <div class="callout"><strong>Limitations:</strong> This is a rule-based educational aid, not a disassembler, emulator or automated malware verdict. It recognizes common x86/x64 instructions; ARM and unusual syntax may not be explained accurately.</div>
+    </section>
+
+    <section class="bottom-cta">
+      <div><div class="eyebrow">BUILT FOR CURIOUS MINDS</div><h2>Learn the instructions.<br><span>Understand the behavior.</span></h2><p>One instruction at a time, from first principles to reverse engineering.</p></div>
+      <button class="btn light" data-go="learn">Explore lessons <span>→</span></button>
+    </section>
+  </main>
+  <footer><a class="brand small" href="#"><span class="brand-mark">A<span>/</span></span><span>AssemblyLab</span></a><span>Independent portfolio project · Educational use</span><a href="https://github.com/compiler-explorer/compiler-explorer/blob/main/docs/API.md" target="_blank" rel="noreferrer">Godbolt API docs ↗</a></footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
